@@ -1,0 +1,64 @@
+@mixin size($width, $height) {
+  width : $width;
+  height: $height;
+}
+
+@mixin remove-default-ul() {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@mixin center($position) {
+  position: absolute;
+
+  @if $position == 'vertical' {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @else if $position == 'horizontal' {
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin screen($size) {
+  $desktop      : "(max-width: 992px)";
+  $tablet       : "(max-width: 768px)";
+  $phone        : "(max-width: 480px)";
+  $iphone-retina: "(max-width: 320px)";
+  
+  @if $size == desktop {
+    @media only screen and #{$desktop} {
+      @content;
+    }
+  }
+  @else if $size == tablet {
+    @media only screen and #{$tablet} {
+      @content;
+    }
+  }
+  @else if $size == phone {
+    @media only screen and #{$phone} {
+      @content;
+    }
+  }
+  @else if $size == iphone-retina {
+    @media only screen and #{$iphone-retina} {
+      @content;
+    }
+  }
+  @else {
+    @media only screen and #{$size} {
+      @content;
+    }
+  }
+}
